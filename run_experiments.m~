@@ -25,14 +25,12 @@ for i=1:length(sigmas)
     xx_metric= array2table(xx_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     uu_metric= array2table(uu_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     save('cheetah_experiment.mat','xx_metric','uu_metric')
+    
     time =time+ time_elapsed;
     disp(['time elapsed: ', num2str(time/60), ' minutes']);
     
     count=2;
-    
     [xx_cost(2,i),uu_cost(2,i), time_elapsed]=Table_Simulation("qr_decomposed","ctc",sigmas(i),n_sample, count);
-    
-    
     xx_metric= array2table(xx_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     uu_metric= array2table(uu_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     save('cheetah_experiment.mat','xx_metric','uu_metric')
@@ -41,9 +39,7 @@ for i=1:length(sigmas)
     disp(['time elapsed: ', num2str(time/60), ' minutes']);
 
     count=3;
-    
     [xx_cost(3,i),uu_cost(3,i), time_elapsed]=Table_Simulation("vaniila_dynamics","clqr",sigmas(i),n_sample, count);
-    
     xx_metric= array2table(xx_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     uu_metric= array2table(uu_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     save('cheetah_experiment.mat','xx_metric','uu_metric')
@@ -52,10 +48,9 @@ for i=1:length(sigmas)
     disp(['time elapsed: ', num2str(time/60), ' minutes']);
     
     count=4;
-    
     [xx_cost(4,i),uu_cost(4,i), time_elapsed]=Table_Simulation("qr_decomposed","clqr",sigmas(i),n_sample, count);
    
-    disp(['end of experiment for sigma=', num2str(sigmas(i))]);
+    disp(['end of experiment for sigma=', num2str(sigmas(i)) 'time elapsed ']);
     disp(['overall progress ', num2str(i*100/length(sigmas)), ' %'])
     
     xx_metric= array2table(xx_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});

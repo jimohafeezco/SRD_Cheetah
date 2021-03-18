@@ -1,5 +1,5 @@
 % close all; clear classes; clc
-function [xx_cost, uu_cost] = Table_Simulation(dynamics,controller,s_d,n_sample, count)
+function [xx_cost, uu_cost, time_elapsed] = Table_Simulation(dynamics,controller,s_d,n_sample, count)
 
 InitialPosition = SRD_get('InitialPosition');
 
@@ -26,6 +26,8 @@ n = Handler_dynamics_generalized_coordinates_model.dof_configuration_space_robot
 % %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Model
+
+tic
 
 switch(dynamics)
     
@@ -81,7 +83,6 @@ ode_fnc_handle = SRD_get_ode_fnc_from_ClosedLoopConstrainedLinearSystem...
     (AA_table, cc_table, G_table, F_table, time_table);
 
 cost_array = zeros(n_sample,2);
-
 for i=1:n_sample
    
        InitialPosition = InitialPositionDistribution(:,i);
@@ -114,6 +115,8 @@ for i=1:n_sample
        disp(['progress:',num2str((i*100)/(n_sample*4)),'%']);
        end
 end
+
+time_elapsed= toc;
 % cost_array
 xx_cost= mean(x_cost);
 uu_cost= mean(u_cost);
