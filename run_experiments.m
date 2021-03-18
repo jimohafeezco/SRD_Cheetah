@@ -3,10 +3,10 @@
 % sigma is standard deviation of the distribution we are sampling from
 sigmas= [0.0001, 0.001, 0.01, 0.1];
 
-% n_sample is size of distribution== number of experiments with different
+% n_sample is the size of distribution== number of experiments with different
 % initial positions
 
-n_sample=2;
+n_sample=100;
 
 result = zeros(4,length(sigmas),2);
 
@@ -56,15 +56,18 @@ for i=1:length(sigmas)
     [xx_cost(4,i),uu_cost(4,i), time_elapsed]=Table_Simulation("qr_decomposed","clqr",sigmas(i),n_sample, count);
    
     disp(['end of experiment for sigma=', num2str(sigmas(i))]);
-    disp(['overall progress ', num2str(i*100/length(sigmas)), ' %'])
+    disp(['overall progress ', num2str(i*100/length(sigmas)), ' %', ...
+        'time elapsed: ', num2str(time/60), ' minutes'])
     
     xx_metric= array2table(xx_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
     uu_metric= array2table(uu_cost', 'VariableNames', {'ctc_vanilla', 'ctc_qr','vaniila_clqr','qr_clqr'},'RowNames' , {'0.0001', '0.001','0.01', '0.1'});
 
     save('cheetah_experiment.mat','xx_metric','uu_metric')
-    time =time+ time_elapsed;
-    disp(['time elapsed: ', num2str(time/60), 'minutes']);
 end
+
+
+
+
 
 
 
