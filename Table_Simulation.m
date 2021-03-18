@@ -4,6 +4,7 @@ function [xx_cost, uu_cost] = Table_Simulation(dynamics,controller,s_d,n_sample)
 InitialPosition = SRD_get('InitialPosition');
 
 random= normrnd(0,s_d,[18,n_sample]);
+
 InitialPositionD= random+InitialPosition;
 
 Handler_IK_Solution = SRD_get('Handler_IK_Solution');
