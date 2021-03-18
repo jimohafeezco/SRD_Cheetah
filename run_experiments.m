@@ -4,7 +4,7 @@
 sigmas= [0.0001, 0.001, 0.01, 0.1];
 
 % n_sample is size of distribution== number of experiments with different
-% start point
+% initial positions
 
 n_sample=100;
 
@@ -29,6 +29,11 @@ save('cheetah_experiment.mat','xx_metric','uu_metric')
 
 
 
+% result=load('cheetah_experiment.mat');
+% result.xx_metric
+% result.uu_metric
+
+%result sample below
 %               ctc_vanilla    ctc_qr    vaniila_clqr    qr_clqr
 %               ___________    ______    ____________    _______
 % 

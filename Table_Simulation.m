@@ -5,7 +5,7 @@ InitialPosition = SRD_get('InitialPosition');
 
 random= normrnd(0,s_d,[18,n_sample]);
 
-InitialPositionD= random+InitialPosition;
+InitialPositionDistribution= random+InitialPosition;
 
 Handler_IK_Solution = SRD_get('Handler_IK_Solution');
 
@@ -46,20 +46,7 @@ switch(dynamics)
     
 end
 
-% [A_table, B_table, c_table, x_table, u_table, dx_table] = ...
-%     SRD_LinearModel_GenerateTable('Handler_dynamics_generalized_coordinates_model', Handler_dynamics_generalized_coordinates_model, ...
-%     'Handler_dynamics_Linearized_Model', Handler_dynamics_Linearized_Model, ...
-%     'Handler_IK_Solution', Handler_IK_Solution, ...
-%     'TimeTable', time_table);
-% 
-% [A_table, B_table, c_table, x_table, u_table, dx_table] = ...
-%     SRD_LinearModel_GenerateTableQR('Handler_dynamics_generalized_coordinates_model', Handler_dynamics_generalized_coordinates_model, ...
-%     'Handler_dynamics_Linearized_Model', Handler_dynamics_Linearized_Model, ...
-%     'Handler_IK_Solution', Handler_IK_Solution, ...
-%     'Handler_Constraints_Model',Handler_Constraints_Model,...
-%     'TimeTable', time_table);
 
-% n_constrained = 5;
 [N_table, G_table, F_table] = SRD_ConstraintsModel_GenerateTable(...
     'Handler_Constraints_Model', Handler_Constraints_Model, ...
     'Handler_dynamics_generalized_coordinates_model', Handler_dynamics_generalized_coordinates_model, ...
@@ -97,7 +84,7 @@ cost_array = zeros(n_sample,2);
 
 for i=1:n_sample
    
-       InitialPosition = InitialPositionD(:,i);
+       InitialPosition = InitialPositionDistribution(:,i);
        
        x0 = [InitialPosition; zeros(size(InitialPosition))];
        [~, solution_tape] = ode45(ode_fnc_handle, time_table, x0);
@@ -121,6 +108,8 @@ end
 % cost_array
 xx_cost= mean(x_cost);
 uu_cost= mean(u_cost);
+
+
 % uu_cost
 % cost_final = norm(cost,1)+norm(error,1);
 % 
