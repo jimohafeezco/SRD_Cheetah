@@ -1,5 +1,5 @@
 % close all; clear classes; clc
-function [xx_cost, uu_cost] = Table_Simulation(dynamics,controller,s_d,n_sample)
+function [xx_cost, uu_cost] = Table_Simulation(dynamics,controller,s_d,n_sample, count)
 
 InitialPosition = SRD_get('InitialPosition');
 
@@ -103,7 +103,16 @@ for i=1:n_sample
        u_cost = max(vecnorm(uu_fd'));
 
        cost_array(i,:) = [x_cost, u_cost]; 
-
+       
+       if count ==2
+       disp(['progress:',num2str(25+(i*100)/(n_sample*4)),'%']);           
+       elseif count ==3
+       disp(['progress:',num2str(50+(i*100)/(n_sample*4)),'%']);           
+       elseif count ==4
+       disp(['progress:',num2str(75+(i*100)/(n_sample*4)),'%']);
+       else
+       disp(['progress:',num2str((i*100)/(n_sample*4)),'%']);
+       end
 end
 % cost_array
 xx_cost= mean(x_cost);
