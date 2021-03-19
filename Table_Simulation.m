@@ -118,8 +118,8 @@ end
 
 time_elapsed= toc;
 % cost_array
-xx_cost= mean(x_cost);
-uu_cost= mean(u_cost);
+xx_cost= mean(x_cost)
+uu_cost= mean(u_cost)
 
 
 % uu_cost

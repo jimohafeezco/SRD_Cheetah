@@ -6,7 +6,7 @@ sigmas= [0.0001, 0.001, 0.01, 0.1];
 % n_sample is the size of distribution== number of experiments with different
 % initial positions
 
-n_sample=100;
+n_sample=2;
 
 result = zeros(4,length(sigmas),2);
 
