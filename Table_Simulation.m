@@ -65,7 +65,7 @@ switch(controller)
     case "ctc"
         K_table = SRD_CTC_GenerateTable('Handler_dynamics_generalized_coordinates_model', Handler_dynamics_generalized_coordinates_model, ...
         'Handler_IK_Solution', Handler_IK_Solution, ...
-        'Kp', 600*eye(n), 'Kd', 500*eye(n), 'TimeTable', time_table);
+        'Kp', 200*eye(n), 'Kd', 100*eye(n), 'TimeTable', time_table);
     case "clqr"  
         Q = 100*eye(2 * n);
         R = 0.01*eye(Handler_dynamics_generalized_coordinates_model.dof_control);
@@ -118,8 +118,8 @@ end
 
 time_elapsed= toc;
 % cost_array
-xx_cost= mean(x_cost)
-uu_cost= mean(u_cost)
+xx_cost= mean(x_cost);
+uu_cost= mean(u_cost);
 
 
 % uu_cost
